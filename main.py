@@ -9,14 +9,20 @@ and enable the API
 Install Python modules from requirements.txt:
     pip3 install -r requirements.txt
 
-Define an environment variable API_KEY as the API KEY you created through
-the GCP console.
+Define an environment variable API_KEY in a file named .env (dot is needed) in the current
+folder.
 '''
 from google.cloud import vision
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 # Read API KEY
 API_KEY=os.environ.get('API_KEY')
+
+if not API_KEY:
+    print('No API key found.')
 
 # Authenticate and connect to client 
 client = vision.ImageAnnotatorClient(client_options={"api_key": API_KEY})
